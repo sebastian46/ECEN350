@@ -1,0 +1,11 @@
+MOVZ X9, 64'h1234, LSL 48 // put the last 16 bits into x9
+MOVZ X10, 64'h5678, LSL 32 // put middle 16 bits into X10
+MOVZ X11, 64'h9abc, LSL 16 // put middle 16 bits into X11
+MOVZ X12, 64'hdef0 // put last 16 bits in X12
+           
+ADD X13, X9, X10; // add upper 32 bits
+ADD X14, X11, X12; // add lower 32 bits
+ADD X9, X13, X14; // the full constant is now loaded in
+           
+STUR X9, [XZR, 0x28] // store in 0x28 memory 
+LDUR X10, [XZR, 0x28] // load in register x10
